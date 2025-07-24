@@ -5,7 +5,7 @@ import App from './App.js';
 import axios from 'axios';
 
 // Set base URL for API requests
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
