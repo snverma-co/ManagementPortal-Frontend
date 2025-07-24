@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import API from '../../services/api';
 
 // Get user from localStorage
 const user = JSON.parse(localStorage.getItem('user'));
@@ -17,7 +17,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await API.post('/auth/register', userData);
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -34,7 +34,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post('/api/auth/login', userData);
+      const response = await API.post('/auth/login', userData);
       if (response.data) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -56,7 +56,7 @@ export const forgotPassword = createAsyncThunk(
   'auth/forgotPassword',
   async (email, thunkAPI) => {
     try {
-      const response = await axios.post('/api/auth/forgot-password', { email });
+      const response = await API.post('/auth/forgot-password', { email });
       return response.data;
     } catch (error) {
       const message = error.response?.data?.message || error.message || error.toString();
